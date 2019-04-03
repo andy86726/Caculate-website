@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>caculate</title>
+</head>
+
+<body style="background:black">
+    <div class="container border border-white rounded" style="width:30%">
+        <div>
+            <input id="caculate-number" type="text" class="form-control text-right text-white border-0 font-weight-bold"
+                style="background:black" aria-label="Text input with checkbox">
+        </div>
+        <div class="container" id="buttons">
+            <div class="row mt-3">
+                <div class="col-md-3 "><button class="btn btn-secondary border border-secondary btn-block" type="button"
+                        value="C" onclick="zero()">C</button></div>
+                <div class="col-md-3"><button class="btn btn-secondary border border-secondary btn-block" type="button"
+                        value="+/-" onclick="poundsign()">+/-</button></div>
+                <div class="col-md-3"><button class="btn btn-secondary border border-secondary btn-block" type="button"
+                        value="%" onclick="percent()">%</button></div>
+                <div class="col-md-3"><button class="btn btn-warning border border-warning btn-block" type="button"
+                        value="/" onclick="divided()">/</button></div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-3"><button class="btn btn-dark border border-dark btn-block  input-number"
+                        type="button" value="7">7</button></div>
+                <div class="col-md-3"><button class="btn btn-dark border border-dark btn-block  input-number"
+                        type="button" value="8">8</button></div>
+                <div class="col-md-3"><button class="btn btn-dark border border-dark btn-block  input-number"
+                        type="button" value="9">9</button></div>
+                <div class="col-md-3"><button class="btn btn-warning border border-warning btn-block " type="button"
+                        value="*" onclick="multipy()">*</button></div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-3"><button class="btn btn-dark border border-dark btn-block  input-number"
+                        type="button" value="4">4</button></div>
+                <div class="col-md-3"><button class="btn btn-dark border border-dark btn-block  input-number"
+                        type="button" value="5">5</button></div>
+                <div class="col-md-3"><button class="btn btn-dark border border-dark btn-block  input-number"
+                        type="button" value="6">6</button></div>
+                <div class="col-md-3"><button class="btn btn-warning border border-warning btn-block " type="button"
+                        value="-" onclick="minus()">-</button></div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-3"><button class="btn btn-dark border border-dark btn-block  input-number"
+                        type="button" value="1">1</button></div>
+                <div class="col-md-3"><button class="btn btn-dark border border-dark btn-block  input-number"
+                        type="button" value="2">2</button></div>
+                <div class="col-md-3"><button class="btn btn-dark border border-dark btn-block  input-number"
+                        type="button" value="3">3</button></div>
+                <div class="col-md-3"><button class="btn btn-warning border border-warning btn-block " type="button"
+                        value="+" onclick="add()">+</button></div>
+            </div>
+            <div class="row mt-4 mb-4">
+                <div class="col-md-6"><button class="btn btn-dark border border-dark btn-block  input-number"
+                        type="button" value="0">0</button></div>
+                <div class="col-md-3"><button id="docs" class="btn btn-dark border border-dark btn-block " type="button"
+                        value="." onclick="docs()">.</button></div>
+                <div class="col-md-3"><button class="btn btn-warning border border-warning btn-block " type="button"
+                        value="=" onclick="equal()">=</button></div>
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script>
+        var caculateNumber = document.getElementById("caculate-number");
+        caculateNumber.value = 0;
+        var caculateArray = new Array();
+        caculateArray[0] = 0;
+        var count = 1;
+        var count1 = 0;
+        var AMMD = new Array();
+        var displayForm = new Array();
+        var AMMD1;
+        var inputNumber = document.getElementsByClassName("input-number");
+        caculateArray[count] = String(caculateNumber.value);
+        for (var i = 0; i < inputNumber.length; i++) {
+            inputNumber[i].onclick = displaynumber;
+        }
+        function displaynumber() {
+            if (AMMD[0] == "Add" || AMMD[1] == "Minus" || AMMD[2] == "Multipy" || AMMD[3] == "Divided" || AMMD[4] == "Equal") {
+                document.getElementById("caculate-number").value = 0;
+                AMMD[0] = null;
+                AMMD[1] = null;
+                AMMD[2] = null;
+                AMMD[3] = null;
+                AMMD[4] = null;
+                AMMD1 = true;
+            }
+            if (caculateNumber.value == "0") {
+                caculateNumber.value = null;
+            }
+            var text = this.value;
+            caculateNumber.value += text;
+            caculateArray[count] = String(caculateNumber.value);
+        }
+        function docs() {
+            if (AMMD[0] == "Add" || AMMD[1] == "Minus" || AMMD[2] == "Multipy" || AMMD[3] == "Divided" || AMMD[4] == "Equal") {
+                document.getElementById("caculate-number").value = 0;
+                AMMD[0] = null;
+                AMMD[1] = null;
+                AMMD[2] = null;
+                AMMD[3] = null;
+                AMMD[4] = null;
+                AMMD1 = true;
+            }
+            if(caculateArray[count]==null){
+                caculateNumber.value=0;              
+            }
+            var docs = document.getElementById("docs");
+            var text1 = docs.value;
+            caculateNumber.value += text1;
+            caculateArray[count] = String(caculateNumber.value);
+            docs.disabled=true;
+        }
+        function add() {
+            if (AMMD[6] == "Minus") {
+                minus();
+                count--;
+                AMMD[6] = null;
+            }
+            else if (AMMD[7] == "Multipy") {
+                multipy()
+                count--;
+                AMMD[7] = null;
+            }
+            else if (AMMD[8] == "Divided") {
+                divided();
+                count--;
+                AMMD[8] = null;
+            }
+            var number1 = caculateArray[count - 1];
+            var number2 = caculateArray[count];
+            if (AMMD[5] == "Add") {
+                if (caculateArray.length == count + 1) {
+                    count++;
+                    caculateArray[count] = Number(number1) + Number(number2);
+                    caculateNumber.value = caculateArray[count];
+                    AMMD1 = true;
+                }
+                else {
+                    count--;
+                    AMMD1 = false;
+                }
+            }
+            count++;
+            AMMD[0] = "Add";
+            AMMD[5] = "Add";
+            var docs = document.getElementById("docs");
+            docs.disabled=false;
+
+        }
+        function minus() {
+            if (AMMD[5] == "Add") {
+                add();
+                count--;
+                AMMD[5] = null;
+            }
+            else if (AMMD[7] == "Multipy") {
+                multipy()
+                count--;
+                AMMD[7] = null;
+            }
+            else if (AMMD[8] == "Divided") {
+                divided();
+                count--;
+                AMMD[8] = null;
+            }
+            var number1 = caculateArray[count - 1];
+            var number2 = caculateArray[count];
+            if (AMMD[6] == "Minus") {
+                if (caculateArray.length == count + 1) {
+                    count++;
+                    caculateArray[count] = Number(number1) - Number(number2);
+                    caculateNumber.value = caculateArray[count];
+                    AMMD1 = true;
+                }
+                else {
+                    count--;
+                    AMMD1 = false;
+                }
+            }
+            count++;
+            AMMD[1] = "Minus";
+            AMMD[6] = "Minus";
+            var docs = document.getElementById("docs");
+            docs.disabled=false;
+        }
+        function multipy() {
+            if (AMMD[6] == "Minus") {
+                minus();
+                count--;
+                AMMD[6] = null;
+            }
+            else if (AMMD[5] == "Add") {
+                add();
+                count--;
+                AMMD[5] = null;
+            }
+            else if (AMMD[8] == "Divided") {
+                divided();
+                count--;
+                AMMD[8] = null;
+            }
+            var number1 = caculateArray[count - 1];
+            var number2 = caculateArray[count];
+            if (AMMD[7] == "Multipy") {
+                if (caculateArray.length == count + 1) {
+                    count++;
+                    caculateArray[count] = Number(number1) * Number(number2);
+                    caculateNumber.value = caculateArray[count];
+                    AMMD1 = true;
+                }
+                else {
+                    count--;
+                    AMMD1 = false;
+                }
+            }
+            count++;
+            AMMD[2] = "Multipy";
+            AMMD[7] = "Multipy";
+            var docs = document.getElementById("docs");
+            docs.disabled=false;
+        }
+        function divided() {
+            if (AMMD[5] == "Add") {
+                add();
+                count--;
+                AMMD[5] = null;
+            }
+            else if (AMMD[6] == "Minus") {
+                minus();
+                count--;
+                AMMD[6] = null;
+            }
+            else if (AMMD[7] == "Multipy") {
+                multipy()
+                count--;
+                AMMD[7] = null;
+            }
+            var number1 = caculateArray[count - 1];
+            var number2 = caculateArray[count];
+            if (AMMD[8] == "Divided") {
+                if (caculateArray.length == count + 1) {
+                    count++;
+                    caculateArray[count] = Number(number1) / Number(number2);
+                    caculateNumber.value = caculateArray[count];
+                    AMMD1 = true;
+                }
+                else {
+                    count--;
+                    AMMD1 = false;
+                }
+            }
+            count++;
+            AMMD[3] = "Divided";
+            AMMD[8] = "Divided";
+            var docs = document.getElementById("docs");
+            docs.disabled=false;
+        }
+        function equal() {
+            var number1 = caculateArray[count - 1];
+            var number2 = caculateArray[count];
+            if (AMMD[5] == "Add" && AMMD1 == true) {
+                count++;
+                caculateArray[count] = Number(number1) + Number(number2);
+                caculateNumber.value = caculateArray[count];
+                AMMD[5] = null;
+            }
+            else if (AMMD[6] == "Minus" && AMMD1 == true) {
+                count++;
+                caculateArray[count] = Number(number1) - Number(number2);
+                caculateNumber.value = caculateArray[count];
+                AMMD[6] = null;
+            } else if (AMMD[7] == "Multipy" && AMMD1 == true) {
+                count++;
+                caculateArray[count] = Number(number1) * Number(number2);
+                caculateNumber.value = caculateArray[count];
+                AMMD[7] = null;
+            }
+            else if (AMMD[8] == "Divided" && AMMD1 == true) {
+                count++;
+                caculateArray[count] = Number(number1) / Number(number2);
+                caculateNumber.value = caculateArray[count];
+                AMMD[8] = null;
+            }
+            AMMD[4] = "Equal";
+            var docs = document.getElementById("docs");
+            docs.disabled=false;
+        }
+        function percent() {
+            if(AMMD[5]=="Add"||AMMD[6] == "Minus"||AMMD[7] == "Multipy"||AMMD[8] == "Divided"){
+                count--;
+            }
+            var number2 = caculateArray[count];
+            caculateArray[count] = number2 / 100;
+            caculateNumber.value = caculateArray[count];
+        }
+        function poundsign() {
+            var number2 = caculateArray[count];
+            if (number2 > 0) {
+                caculateArray[count] = number2 * -1;
+                caculateNumber.value = caculateArray[count];
+            }
+            else if (number2 < 0) {
+                caculateArray[count] = number2 * -1;
+                caculateNumber.value = caculateArray[count];
+            }
+        }
+        function zero() {
+            caculateNumber.value = 0;
+            caculateArray = [];
+            caculateArray[0] = 0;
+            count = 1;
+            AMMD = [];
+            AMMD1 = null;
+        } 
+    </script>
+</body>
+
+</html>
